@@ -1,0 +1,27 @@
+table.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+table.product-table th, table.product-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+table.product-table th {
+  background: #f0f0f0;
+}
+table.product-table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+table.product-table button {
+  padding: 4px 10px;
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+table.product-table button:hover {
+  background: #a71d2a;
+}
