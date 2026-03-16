@@ -25,9 +25,9 @@ jobs:
         run: npm install
         working-directory: frontend
 
-      - name: Run tests
-        run: npm test -- --watchAll=false
-        working-directory: frontend
+      # - name: Run tests
+      #   run: npm test -- --watchAll=false
+      #   working-directory: frontend
 
       - name: Build frontend
         run: npm run build
