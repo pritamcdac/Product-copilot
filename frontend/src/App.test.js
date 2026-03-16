@@ -1,10 +1,26 @@
+console.log('*** App.test.js loaded ***');
+// Mock './api.js' default export as an object with get, post, delete methods
+jest.mock('./api.js', () => {
+  console.log('*** jest.mock for ./api.js executed ***');
+  return {
+    __esModule: true,
+    default: {
+      get: jest.fn(() => Promise.resolve({ data: [] })),
+      post: jest.fn(() => Promise.resolve({ data: { id: 1, name: 'Test', price: 10, description: 'Test product' } })),
+      delete: jest.fn(() => Promise.resolve({ data: {} })),
+    }
+  };
+});
 
 
-// Mock './api' named exports directly - MUST be at the very top before any imports
+// Mock './api' default export as an object with get, post, delete methods
 jest.mock('./api', () => ({
-  get: jest.fn(() => Promise.resolve({ data: [] })),
-  post: jest.fn(() => Promise.resolve({ data: { id: 1, name: 'Test', price: 10, description: 'Test product' } })),
-  del: jest.fn(() => Promise.resolve({ data: {} })),
+  __esModule: true,
+  default: {
+    get: jest.fn(() => Promise.resolve({ data: [] })),
+    post: jest.fn(() => Promise.resolve({ data: { id: 1, name: 'Test', price: 10, description: 'Test product' } })),
+    delete: jest.fn(() => Promise.resolve({ data: {} })),
+  }
 }));
 
 import { render, screen, fireEvent } from '@testing-library/react';
