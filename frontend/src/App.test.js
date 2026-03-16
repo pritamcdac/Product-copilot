@@ -1,12 +1,14 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import App from './App';
 
-// Mock axios
+
+// Mock './api' named exports directly - MUST be at the very top before any imports
 jest.mock('./api', () => ({
   get: jest.fn(() => Promise.resolve({ data: [] })),
   post: jest.fn(() => Promise.resolve({ data: { id: 1, name: 'Test', price: 10, description: 'Test product' } })),
-  delete: jest.fn(() => Promise.resolve({})),
+  del: jest.fn(() => Promise.resolve({ data: {} })),
 }));
+
+import { render, screen, fireEvent } from '@testing-library/react';
+import App from './App';
 
 describe('App Component', () => {
   test('renders product form', () => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from './api';
+import { get, post, del } from './api';
 import Product from './components/Product';
 import './App.css';
 
@@ -8,7 +8,7 @@ function App() {
   const [form, setForm] = useState({ name: '', price: '', description: '' });
 
   const fetchProducts = async () => {
-    const res = await axios.get('/products');
+    const res = await get('/products');
     setProducts(res.data);
   };
 
@@ -22,13 +22,13 @@ function App() {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    await axios.post('/products', form);
+    await post('/products', form);
     setForm({ name: '', price: '', description: '' });
     fetchProducts();
   };
 
   const handleDelete = async id => {
-    await axios.delete(`/products/${id}`);
+    await del(`/products/${id}`);
     fetchProducts();
   };
 
