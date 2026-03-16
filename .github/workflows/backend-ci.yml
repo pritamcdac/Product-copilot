@@ -26,7 +26,7 @@ jobs:
 
       # - name: Run tests
       #   run: npm test -- --watchAll=false
-      #   working-directory: backend
+      #   working-directory: backend .
 
       - name: Build backend
         run: npm run build || echo "No build step"
