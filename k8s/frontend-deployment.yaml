@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: product-app
+    tier: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-app
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: product-app
+        tier: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: frontend:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: REACT_APP_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: frontend-config
+                  key: REACT_APP_API_URL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    app: product-app
+    tier: frontend
+spec:
+  type: NodePort
+  selector:
+    app: product-app
+    tier: frontend
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      nodePort: 30080
